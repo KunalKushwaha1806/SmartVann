@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartVann Reports</title>
+    
+    <script src="script.js" defer></script>
+</head>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #43cea2, #185a9d);
+    color: white;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Container */
+.report-page-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #00796b, #28a745);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1rem;
+}
+
+/* Reports Section */
+.reports-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Report Card */
+.report-card {
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform 0.8s;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-front {
+    transform: rotateY(0);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #28a745, #00796b);
+    color: white;
+}
+
+.report-card:hover .card-front {
+    transform: rotateY(-180deg);
+}
+
+.report-card:hover .card-back {
+    transform: rotateY(0);
+}
+
+/* Highlights List */
+.card-back ul {
+    text-align: left;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.card-back ul li {
+    margin: 5px 0;
+}
+
+/* Read More Button */
+.read-more-btn {
+    background: linear-gradient(135deg, #185a9d, #43cea2);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.read-more-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+</style>
+<body>
+    <div class="report-page-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>SmartVann Reports</h1>
+            <p>Explore detailed analysis on AQI and population density across the globe.</p>
+        </header>
+
+        <!-- Reports Section -->
+        <section class="reports-section">
+            <!-- Article 1 -->
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Global AQI Trends 2024</h2>
+                    <p>A comprehensive overview of air quality data worldwide.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li>Top 5 cities with the worst AQI</li>
+                        <li>Strategies to improve air quality</li>
+                        <li>Impact of urbanization on AQI</li>
+                    </ul>
+                    <a href="RMaqitrend.html"><button class="read-more-btn">Read More</button></a>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Population Density vs. AQI</h2>
+                    <p>How population density affects air quality globally.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li>Correlation between population and pollution</li>
+                        <li>Regions with critical air quality levels</li>
+                        <li>Solutions for overcrowded cities</li>
+                    </ul>
+                    <a href="RM2popdenvsaqi.html" class="read-more-btn">Read More</a>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Urban Air Quality Solutions</h2>
+                    <p>Innovative ways to tackle air pollution in urban areas.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li>Green technology implementation</li>
+                        <li>Case studies from developed countries</li>
+                        <li>Long-term sustainability approaches</li>
+                    </ul>
+                    <a href="urbanairqtysol.html" class=read-more-btn>Read More</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Scroll Reveal Animation for Cards
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.report-card');
+    const options = {
+        root: null,
+        threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, options);
+
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+});
+    </script>
+</body>
+</html>

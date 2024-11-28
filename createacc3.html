@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AQI Map</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+        }
+
+        header {
+            background: #006837;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+
+        #controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background: #006837;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #004c29;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Interactive AQI Map</h1>
+        <p>Select a region to view the AQI data.</p>
+    </header>
+
+    <div id="map"></div>
+    <div id="controls">
+        <button id="liveAqiBtn" class="btn">Live AQI Data</button>
+        <button id="pastDataBtn" class="btn">View Past Data (3D)</button>
+    </div>
+
+    <footer>
+        <p>© 2024 AQI Insights. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Mapbox Access Token (replace with your valid token)
+        mapboxgl.accessToken = 'your_mapbox_access_token_here';
+
+        // Initialize the map
+        var map = new mapboxgl.Map({
+            container: 'map', // ID of the div element
+            style: 'mapbox://styles/mapbox/satellite-streets-v12', // Mapbox style
+            center: [78.9629, 20.5937], // Centered on India
+            zoom: 4
+        });
+
+        // Add navigation controls
+        map.addControl(new mapboxgl.NavigationControl());
+
+        // Event listeners for buttons
+        document.getElementById('liveAqiBtn').addEventListener('click', function () {
+            alert('Fetching live AQI data... (Placeholder)');
+            // Fetch live AQI data from an API if available.
+        });
+
+        document.getElementById('pastDataBtn').addEventListener('click', function () {
+            display3DPastData();
+        });
+
+        // Function to display 3D animated past AQI data
+        function display3DPastData() {
+            // Sample past AQI data (Month: AQI value)
+            const pastData = [
+                { month: 'January', aqi: 45 },
+                { month: 'February', aqi: 55 },
+                { month: 'March', aqi: 75 },
+                { month: 'April', aqi: 85 },
+                { month: 'May', aqi: 120 },
+                { month: 'June', aqi: 160 },
+                { month: 'July', aqi: 180 },
+                { month: 'August', aqi: 140 },
+                { month: 'September', aqi: 110 },
+                { month: 'October', aqi: 95 },
+                { month: 'November', aqi: 100 },
+                { month: 'December', aqi: 80 }
+            ];
+
+            const width = 800, height = 400;
+
+            const svg = d3.select('body').append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .style('position', 'absolute')
+                .style('top', '50%')
+                .style('left', '50%')
+                .style('transform', 'translate(-50%, -50%)');
+
+            const x = d3.scaleBand()
+                .domain(pastData.map(d => d.month))
+                .range([0, width])
+                .padding(0.1);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(pastData, d => d.aqi)])
+                .nice()
+                .range([height, 0]);
+
+            const bars = svg.selectAll('.bar')
+                .data(pastData)
+                .enter().append('rect')
+                .attr('class', 'bar')
+                .attr('x', d => x(d.month))
+                .attr('width', x.bandwidth())
+                .attr('y', height)
+                .attr('height', 0)
+                .attr('fill', '#006837');
+
+            bars.transition()
+                .duration(1000)
+                .ease(d3.easeBounceOut)
+                .attr('y', d => y(d.aqi))
+                .attr('height', d => height - y(d.aqi));
+        }
+    </script>
+</body>
+</html>

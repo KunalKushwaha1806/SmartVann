@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartVann Publications</title>
+    
+</head>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #28a745, #00c853);
+    color: white;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.publications-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #00796b, #28a745);
+    border-radius: 15px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Publications Section */
+.publications-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.publication-card {
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.publication-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-content h2 {
+    font-size: 1.5rem;
+    color: #00796b;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.read-more-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #00c853, #00796b);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.read-more-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    gap: 10px;
+}
+
+.pagination-btn {
+    padding: 10px 20px;
+    background: white;
+    color: #28a745;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.pagination-btn:hover {
+    background: #28a745;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #00796b;
+    color: white;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+</style>
+<body>
+    <div class="publications-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>SmartVann Publications</h1>
+            <p>Explore our innovative insights, reports, and research on environmental sustainability.</p>
+        </header>
+
+        <!-- Publications Section -->
+        <section class="publications-section">
+            <!-- Example Publication Card -->
+            <div class="publication-card">
+                <div class="card-image">
+                   
+                </div>
+                <div class="card-content">
+                    <h2>Forest Sustainability Report 2024</h2>
+                    <p>An in-depth analysis of global deforestation trends and their environmental impact.</p>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+
+            <div class="publication-card">
+                <div class="card-image">
+                    
+                </div>
+                <div class="card-content">
+                    <h2>Clean Energy Innovations</h2>
+                    <p>Exploring breakthroughs in renewable energy solutions for a sustainable future.</p>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+
+            <div class="publication-card">
+                <div class="card-image">
+                    
+                </div>
+                <div class="card-content">
+                    <h2>The AQI Impact Report</h2>
+                    <p>How air quality influences public health and what we can do to improve it.</p>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="pagination-btn">Previous</button>
+            <button class="pagination-btn">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">Next</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 SmartVann. All Rights Reserved.</p>
+    </footer>
+    <script>
+        // Scroll-based Animation for Cards
+const cards = document.querySelectorAll('.publication-card');
+
+const observerOptions = {
+    root: null, // uses the viewport as the root
+    threshold: 0.1 // trigger the animation when 10% of the card is in view
+};
+
+const handleCardAnimation = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Add animation class when the card is in view
+            entry.target.classList.add('visible');
+        }
+    });
+};
+
+const observer = new IntersectionObserver(handleCardAnimation, observerOptions);
+
+// Observe each publication card
+cards.forEach(card => {
+    observer.observe(card);
+});
+
+// Hover Effect for "Read More" Buttons
+const readMoreButtons = document.querySelectorAll('.read-more-btn');
+
+readMoreButtons.forEach(button => {
+    button.addEventListener('mouseenter', () => {
+        button.style.transform = 'scale(1.1)';
+        button.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
+    });
+
+    button.addEventListener('mouseleave', () => {
+        button.style.transform = 'scale(1)';
+        button.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+    });
+});
+
+// Scroll Animations for the Header and Pagination
+const header = document.querySelector('.header');
+const pagination = document.querySelector('.pagination');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 150) {
+        header.classList.add('fade-in');
+    } else {
+        header.classList.remove('fade-in');
+    }
+
+    if (window.scrollY > 500) {
+        pagination.classList.add('fade-in');
+    } else {
+        pagination.classList.remove('fade-in');
+    }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Live AQI?</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #d0ece7, #aed6f1);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #154360;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .intro {
+            padding: 30px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 90%;
+        }
+
+        .key-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            width: 90%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card {
+            width: 30%;
+            margin: 10px;
+            padding: 15px;
+            background: #e8f6f3;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+        }
+
+        canvas {
+            display: block;
+            margin: 20px auto;
+            width: 40%;
+            height: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #1c2833;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            position: relative;
+            bottom: 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h2, h3 {
+            color: #154360;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 76px) {
+            .feature-card {
+                width: 100%;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        🌬 Why Live AQI? 🌍
+    </header>
+    
+    <section class="intro">
+        <h2>Understanding the Importance of Live Air Quality Index (AQI)</h2>
+        <p>
+            Air quality plays a vital role in determining the well-being of humans, ecosystems, and climate. The Live AQI system offers real-time insights into air pollution levels, enabling individuals, communities, and policymakers to make informed decisions.
+        </p>
+    </section>
+
+    <section class="key-features">
+        <div class="feature-card">
+            <h3>🌡 Real-Time Monitoring</h3>
+            <p>Get instant updates on air quality levels worldwide to safeguard health and take precautionary measures.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🛠 Data-Driven Solutions</h3>
+            <p>Analyze data to implement effective urban policies and technological interventions.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🌿 Environmental Impact</h3>
+            <p>Track pollution trends and their effects on global warming, biodiversity, and ecosystems.</p>
+        </div>
+    </section>
+
+    <!-- Pie Chart Visualization -->
+    <section class="intro">
+        <h2>Comprehensive Global AQI Insights</h2>
+        <p>
+            The Live AQI platform collects data from multiple sources, such as government air monitoring systems, satellite data, and IoT sensors. The following chart represents the distribution of AQI across various cities globally:
+        </p>
+        <div>
+            <canvas id="aqiChart"></canvas>
+        </div>
+    </section>
+
+    <footer>
+        © 2024 SmartVann. All Rights Reserved. | Powered by Live AQI Data
+    </footer>
+
+    <script>
+        // AQI Data Visualization with Chart.js (Pie Chart)
+        function createAQIPieChart() {
+            const aqiData = {
+                labels: ['Good (0-50)', 'Moderate (51-100)', 'Unhealthy for Sensitive Groups (101-150)', 'Unhealthy (151-200)', 'Very Unhealthy (201-300)', 'Hazardous (301+)'],
+                datasets: [{
+                    data: [35, 25, 20, 10, 7, 3],
+                    backgroundColor: [
+                        '#4caf50', // Green for Good
+                        '#ffeb3b', // Yellow for Moderate
+                        '#ff9800', // Orange for Unhealthy for Sensitive Groups
+                        '#f44336', // Red for Unhealthy
+                        '#9c27b0', // Purple for Very Unhealthy
+                        '#b71c1c'  // Dark Red for Hazardous
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            const aqiChartCtx = document.getElementById('aqiChart').getContext('2d');
+            new Chart(aqiChartCtx, {
+                type: 'pie', // Specifies the type of chart
+                data: aqiData, // Provides the data to the chart
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top', // Positions the chart legend
+                        }
+                    }
+                }
+            });
+        }
+
+        // Call the function to initialize the pie chart
+        createAQIPieChart(); // Creates the AQI pie chart
+    </script>
+</body>
+</html>

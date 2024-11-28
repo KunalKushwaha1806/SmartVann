@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Population Density?</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e0f7fa, #80deea);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #00695c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            position: sticky;
+            top: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .intro-section, .data-section {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100%;
+            height: 400px;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #00796b;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            text-align: left;
+            margin: 20px auto;
+        }
+
+        .features li {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        footer {
+            background-color: #004d40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            position: sticky;
+            bottom: 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-container {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        🌍 Why Population Density?
+    </header>
+
+    <!-- Introduction Section -->
+    <div class="container">
+        <div class="intro-section">
+            <h2>Why Analyze Population Density?</h2>
+            <p>
+                Understanding population density helps in identifying overpopulated regions, assessing air quality risk zones, planning sustainable development, and exploring future opportunities for urban management.
+            </p>
+        </div>
+
+        <!-- Key Features -->
+        <div class="data-section">
+            <h2>Key Features</h2>
+            <ul class="features">
+                <li><strong>Identify Overpopulated Regions:</strong> Highlight areas with critical population density.</li>
+                <li><strong>Assess Risk Zones for Air Quality:</strong> Evaluate areas with poor AQI and high health risks.</li>
+                <li><strong>Plan Sustainable Development:</strong> Use density data for resource allocation and urban planning.</li>
+                <li><strong>Explore New Opportunities:</strong> Investigate innovative ways to manage high-density regions.</li>
+            </ul>
+            <p>
+                Latest air quality index (AQI) data shows critical hotspots in urban regions, with values ranging from <strong>50</strong> (moderate) to over <strong>300</strong> (hazardous).
+            </p>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="data-section">
+            <h2>Air Quality Index (AQI) Overview</h2>
+            <div class="chart-container">
+                <canvas id="aqiChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 SmartVann. All Rights Reserved. | Powered by Data for Change
+    </footer>
+
+    <script>
+        // Chart Visualization for AQI Data
+        const aqiData = {
+            labels: [
+                'Good (0-50)',
+                'Moderate (51-100)',
+                'Unhealthy for Sensitive Groups (101-150)',
+                'Unhealthy (151-200)',
+                'Very Unhealthy (201-300)',
+                'Hazardous (301+)'
+            ],
+            datasets: [{
+                label: 'AQI Levels',
+                data: [25, 40, 20, 10, 5, 2], // Example data
+                backgroundColor: [
+                    '#4caf50',
+                    '#ffeb3b',
+                    '#ff9800',
+                    '#f44336',
+                    '#9c27b0',
+                    '#d50000'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const ctx = document.getElementById('aqiChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar', // Bar chart for AQI visualization
+            data: aqiData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

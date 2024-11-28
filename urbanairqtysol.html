@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Air Quality Solutions</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #0d47a1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            position: sticky;
+            top: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        canvas {
+            width: 90%;
+            height: 400px;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .data-section {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            text-align: center;
+        }
+
+        .chart-container {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        footer {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            position: sticky;
+            bottom: 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #1565c0;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        🌍 Urban Air Quality Solutions 🌿
+    </header>
+
+    <div class="data-section">
+        <h2>Urban Air Quality Solutions Overview</h2>
+        <p>
+            Discover innovative strategies to improve urban air quality, including green spaces, renewable energy adoption, pollution control technologies, and community-driven initiatives.
+        </p>
+        <div class="chart-container">
+            <canvas id="airQualityChart"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 SmartVann. All Rights Reserved. | Designed with 💙 for Clean Air
+    </footer>
+
+    <script>
+        // Data for Air Quality Solutions
+        const airQualityData = {
+            labels: [
+                'Green Spaces',
+                'Pollution Control',
+                'Renewable Energy',
+                'Public Transport',
+                'Awareness Campaigns'
+            ],
+            values: [35, 25, 20, 15, 5] // Example data
+        };
+
+        // Chart.js Visualization
+        const ctx = document.getElementById('airQualityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: airQualityData.labels,
+                datasets: [{
+                    label: 'Air Quality Solutions',
+                    data: airQualityData.values,
+                    backgroundColor: [
+                        '#4caf50',
+                        '#ff5722',
+                        '#ffc107',
+                        '#2196f3',
+                        '#8e24aa'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

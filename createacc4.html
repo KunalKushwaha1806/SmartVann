@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Statistics & AQI</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+</head>
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+    color: #333;
+    background-image: url('blackforest.jpg');
+    background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+}
+
+header {
+    text-align: center;
+    background: #004c29;
+    color: white;
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.btn {
+    background: #006837;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 20px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #004c29;
+}
+
+.hidden {
+    display: none;
+}
+
+.map {
+    height: 400px;
+    margin: 20px auto;
+}
+
+.chart {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+}
+
+.info {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+;
+}
+</style>
+<body>
+    <header>
+        <h1>Forest Statistics & AQI Relationship</h1>
+        <p>Explore how deforestation impacts AQI using interactive maps and data visualizations.</p>
+    </header>
+
+    <div class="container">
+       <a href="showforestdata.html"><button id="showDataBtn" class="btn">Show Forest Data</button></a>
+        <div id="dataContainer" class="hidden">
+            <div id="map" class="map"></div>
+            <canvas id="forestChart" class="chart"></canvas>
+            <div class="info">
+                <h3>Deforestation and AQI Relationship</h3>
+                <p>
+                    Forests act as natural air purifiers by absorbing CO<sub>2</sub> and releasing oxygen. 
+                    Deforestation reduces air quality, leading to higher AQI levels. Areas with significant 
+                    forest loss show a clear trend of worsening AQI over the last four years.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <p>© 2024 Forest & AQI Insights. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Mapbox Access Token (replace with your token)
+mapboxgl.accessToken = 'your_mapbox_access_token_here';
+
+// Sample Deforestation Data for the Last 4 Years
+const forestData = [
+    { year: 2020, forestCover: 35, avgAQI: 95 },
+    { year: 2021, forestCover: 32, avgAQI: 105 },
+    { year: 2022, forestCover: 30, avgAQI: 115 },
+    { year: 2023, forestCover: 28, avgAQI: 125 }
+];
+
+// Initialize Map
+function initializeMap() {
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v12',
+        center: [78.9629, 20.5937], // Centered on India
+        zoom: 4
+    });
+
+    forestData.forEach((data, index) => {
+        const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+            ${data.year}: Forest Cover - ${data.forestCover}%
+        );
+
+        new mapboxgl.Marker({ color: index % 2 === 0 ? 'green' : 'red' })
+            .setLngLat([78.9629, 20.5937])
+            .setPopup(popup)
+            .addTo(map);
+    });
+}
+
+// Initialize Chart
+function initializeChart() {
+    const ctx = document.getElementById('forestChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: forestData.map(d => d.year),
+            datasets: [
+                {
+                    label: 'Forest Cover (%)',
+                    data: forestData.map(d => d.forestCover),
+                    borderColor: 'green',
+                    fill: false,
+                    tension: 0.1
+                },
+                {
+                    label: 'Average AQI',
+                    data: forestData.map(d => d.avgAQI),
+                    borderColor: 'red',
+                    fill: false,
+                    tension: 0.1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Deforestation vs AQI (2020-2023)'
+                },
+                legend: {
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+// Button to Display Data
+document.getElementById('showDataBtn').addEventListener('click', () => {
+    const dataContainer = document.getElementById('dataContainer');
+    dataContainer.classList.remove('hidden');
+
+    // Initialize Map and Chart
+    initializeMap();
+    initializeChart();
+});
+    </script>
+</body>
+</html>

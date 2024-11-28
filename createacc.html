@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartVann - Header with Background</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            overflow: hidden;
+        }
+
+        /* Header Styling */
+        .header {
+            position: relative;
+            width: 100%;
+            height: 33vh;
+            background-image: url('forest.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .header-content {
+            z-index: 1;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .header-content p {
+            margin: 5px 0 20px;
+            font-size: 1.2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            border: 1px solid white;
+            border-radius: 20px;
+            transition: all 0.3s ease-in-out;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-buttons a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        /* Basic reset */
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f5f5f5; /* Light background */
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform 0.5s ease;
+    }
+
+    .container:hover {
+      transform: rotateY(10deg);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #00bcd4;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-heading {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #00bcd4;
+    }
+
+    .form-button {
+      width: 100%;
+      padding: 14px;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-button:hover {
+      background-color: #0097a7;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .form-footer p {
+      font-size: 14px;
+    }
+
+    .form-footer a {
+      color: #00bcd4;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Adding a 3D card-like effect on hover */
+    .form-card {
+      perspective: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-card:hover .container {
+      transform: rotateY(10deg);
+    }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>SmartVann</h1>
+            <p>Welcome to SmartVann - Your premium solution.</p>
+    
+            <div class="nav-buttons">
+               
+            </div>
+        </div>
+    </header>
+    <br>
+     <!-- Main container -->
+  <div class="form-card">
+    <div class="container">
+      <div class="logo">Smart🌱Vann</div>
+      <div class="form-heading">Create Account</div>
+
+      <!-- Registration form -->
+      <form id="registration-form">
+        <input type="text" id="full-name" class="form-input" placeholder="Full Name" required>
+        <input type="email" id="email" class="form-input" placeholder="Email Address" required>
+        <input type="password" id="password" class="form-input" placeholder="Password" required>
+        <input type="password" id="confirm-password" class="form-input" placeholder="Confirm Password" required>
+
+        <a href="accountcreated.html">
+          <button type="button" class="form-button">Sign Up</button>
+        </a>
+            </form>
+
+      <!-- Footer text -->
+      <div class="form-footer">
+        <p>Already have an account? <a href="loginpage.html">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for form validation -->
+  <script>
+    document.getElementById('registration-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      alert("Registration successful!");
+      // You can add your form submission logic here (e.g., sending data to a server)
+    });
+     /* General Reset */
+     body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Card Styling */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .card h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            animation: bounceText 1.5s infinite alternate;
+        }
+
+        .card p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .buttons a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 126, 95, 0.7);
+        }
+
+        .buttons a:active {
+            transform: scale(1);
+            box-shadow: 0 4px 10px rgba(255, 126, 95, 0.5);
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceText {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 3D Background Effects */
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: floatShapes 6s infinite alternate ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 15%;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            right: 10%;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 60%;
+        }
+
+        @keyframes floatShapes {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-20px) rotate(360deg);
+            }
+        }
+        <div class="card">
+        <h1>Account Created!</h1>
+        <p>Your account was created successfully. Welcome to SmartVann!</p>
+        <div class="buttons">
+            <a href="/home">Go to Home</a>
+            <a href="/profile">View Profile</a>
+        </div>
+    </div>
+
+    <!-- Floating Shapes for 3D Animation -->
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+
+
+    
+</body> 
+</html>

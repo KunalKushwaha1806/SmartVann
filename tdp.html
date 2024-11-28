@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tree Donation | SmartVann</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #74ebd5, #acb6e5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+    .donation-container {
+      width: 80%;
+      height:auto;
+      max-width: 700px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transform: perspective(2000px) rotatex(10deg);
+      
+    }
+    .donation-container:hover {
+      transform: perspective(1000px) rotateX(0deg) scale(1.02);
+      transition: all 0.3s ease-in-out;
+       
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #00796b;
+    }
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+    button {
+      background-color: #00796b;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    .tree-image {
+      width: 100px;
+      margin: 20px auto;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    .success-message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: green;
+    }
+    img{
+      border-radius: 50%; 
+    }
+  </style>
+</head>
+<body>
+  <div class="donation-container">
+    <img src="treedonation.jpg" alt="Tree Icon" class="tree-image">
+    <h1>Donate a Tree</h1>
+    <p>Make a difference! Your donation helps plant trees and improves the environment. Fill out the form below to donate.</p>
+    <form id="donationForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+      <select id="organization" required>
+        <option value="">Select Organization</option>
+        <option value="green-planet">Green Planet</option>
+        <option value="earth-heroes">Earth Heroes</option>
+        <option value="tree-lovers">Tree Lovers Foundation</option>
+      </select>
+      <select id="organization" required>
+        <option value="" >Select Tree Name</option>
+        <option value="green-planet">Neem Tree</option>
+        <option value="earth-heroes">Peepal Tree</option>
+        <option value="tree-lovers">Banyan Tree</option>
+        <option value="green-planet">Ashoka Tree</option>
+        <option value="earth-heroes">Mango Tree</option>
+        <option value="tree-lovers">Peepal Tree</option>
+        <option value="earth-heroes">Sandalwood Tree</option>
+        <option value="tree-lovers">Gulmohar Tree</option>
+        <option value="green-planet">Pomegranate Tree</option>
+        <option value="earth-heroes">Amla Tree</option>
+        <option value="tree-lovers">Peach Tree</option>
+        <option value="earth-heroes">Shisham Tree</option>
+        <option value="tree-lovers">Coconut Tree</option>
+
+
+      </select>
+      <input type="number" id="treeCount" placeholder="Number of Trees" min="1" required>
+      <a href="paymentportal.html"><button type="button">Donate Now</button></a>
+    </form>
+    <div class="success-message" id="successMessage">
+      Thank you for your generous donation! Your tree(s) have been booked. 🌳
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('donationForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simulate Payment & Backend API Integration
+      alert('Redirecting to Payment Gateway...');
+      
+      // Simulate successful booking
+      successMessage.style.display = 'block';
+
+      // Reset form fields
+      form.reset();
+    });
+  </script>
+</body>
+</html>

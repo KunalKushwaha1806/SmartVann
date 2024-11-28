@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Live AQI Viewer</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            overflow: hidden;
+        }
+
+        /* Background Animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Page Content Container */
+        .container {
+            text-align: center;
+            color: #ffffff;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeIn 2s;
+        }
+
+        /* Description Styling */
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 3s;
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            animation: fadeIn 4s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 126, 95, 0.6);
+        }
+
+        /* 3D Background Animation */
+        .animation-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            animation: rotateBg 15s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Background -->
+    <div class="animation-bg"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Air Quality Index Monitor</h1>
+        <p>Track and monitor real-time AQI with innovative visualization and analytics.</p>
+        <button class="btn" onclick="openColab()">Live AQI</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to Open Colab Output in a New Tab
+        function openColab() {
+            const colabLink = "https://colab.research.google.com/drive/16Sex8NcyIWLvBVLgU0L2ZZYLlqjCNTen?usp=sharing";
+            window.open(colabLink, '_blank');
+        }
+    </script>
+</body>
+</html>

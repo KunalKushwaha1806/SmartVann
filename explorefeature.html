@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Features - SmartVann</title>
+    
+    <script src="script.js" defer></script>
+</head>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #2ecc71, #27ae60);
+    color: white;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Container */
+.explore-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1rem;
+}
+
+/* Features Section */
+.features-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Feature Card */
+.feature-card {
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+    position: relative;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform 0.8s;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-front {
+    transform: rotateY(0);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.feature-card:hover .card-front {
+    transform: rotateY(-180deg);
+}
+
+.feature-card:hover .card-back {
+    transform: rotateY(0);
+}
+
+/* Button Styles */
+.explore-btn {
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.explore-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+</style>
+<body>
+    <div class="explore-container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Explore Features</h1>
+            <p>Discover the innovative capabilities of SmartVann to make the world a healthier place.</p>
+        </header>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <!-- Feature 1: Live AQI Analysis -->
+            <div class="feature-card">
+                <div class="card-front">
+                    <h2>Live AQI Analysis</h2>
+                    <p>Track live air quality data across the globe and ensure better health decisions.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Why Live AQI?</h3>
+                    <ul>
+                        <li>Global real-time AQI updates</li>
+                        <li>Analyze trends by region</li>
+                        <li>Health impact notifications</li>
+                    </ul>
+                    <a href="whyliveaqi.html" class="explore-btn" onclick="showLiveAQI()">Explore</a>
+                </div>
+            </div>
+
+            <!-- Feature 2: Population Density Analysis -->
+            <div class="feature-card">
+                <div class="card-front">
+                    <h2>Population Density Analysis</h2>
+                    <p>Understand density metrics to manage resources and reduce risks.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Why Population Density?</h3>
+                    <ul>
+                        <li>Identify overpopulated regions</li>
+                        <li>Assess risk zones for air quality</li>
+                        <li>Plan sustainable development</li>
+                    </ul>
+                    <a href="whypopden.html" class="explore-btn" onclick="showDensityAnalysis()">Explore</a>
+                </div>
+            </div>
+
+            <!-- Feature 3: Risk Alerts -->
+            <div class="feature-card">
+                <div class="card-front">
+                    <h2>Risk Alerts</h2>
+                    <p>Automatic alerts for individuals in high-risk areas based on AQI and density.</p>
+                </div>
+                <div class="card-back">
+                    <h3>How It Works</h3>
+                    <ul>
+                        <li>Calculates risk zones</li>
+                        <li>Sends alerts to registered users</li>
+                        <li>Guides on precautions</li>
+                    </ul>
+                    <a href="riskalert.html" class="explore-btn" onclick="sendRiskAlerts()">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Feature 4: Tree Donation -->
+            <div class="feature-card">
+                <div class="card-front">
+                    <h2>Tree Donation</h2>
+                    <p>Contribute to global reforestation efforts by donating to plant trees.</p>
+                </div>
+                <div class="card-back">
+                    <h3>Why Donate?</h3>
+                    <ul>
+                        <li>Offset pollution impact</li>
+                        <li>Support verified organizations</li>
+                        <li>Track your contribution</li>
+                    </ul>
+                    <a href="tdp.html"><button class="explore-btn" onclick="donateTree()">Donate Now</button></a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Simulate Live AQI Data
+function showLiveAQI() {
+    alert("Feature: Live AQI Analysis\nReal-time air quality data is being analyzed for your location.");
+}
+
+// Simulate Population Density Analysis
+function showDensityAnalysis() {
+    alert("Feature: Population Density Analysis\nAnalyzing global population density metrics.");
+}
+
+// Simulate Sending Risk Alerts
+function sendRiskAlerts() {
+    alert("Feature: Risk Alerts\nHigh-risk zones detected. Alerts sent to registered users in affected areas.");
+}
+
+// Simulate Tree Donation
+function donateTree() {
+    alert("Feature: Tree Donation\nThank you for your contribution! You are helping to plant trees and offset pollution.");
+}
+    </script>
+</body>
+</html>

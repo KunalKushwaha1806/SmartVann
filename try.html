@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live AQI Alert System</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Leaflet.js for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<style>
+    /* General Body Styling */
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right, #f8f9fa, #ffffff); /* Subtle light theme */
+        color: #333;
+    }
+
+    /* Header Styling */
+    header {
+        background: #007bff;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2em;
+    }
+
+    /* Container Styling */
+    .container {
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Control Buttons */
+    .btn {
+        font-size: 1em;
+        padding: 10px 15px;
+        margin: 5px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+    }
+
+    /* Alert Box Styling */
+    .alert {
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 10px;
+        margin: 20px auto;
+        border-radius: 5px;
+        color: #fff;
+        background-color: #2196f3; /* Default (Blue) */
+        animation: blink 1s infinite;
+    }
+
+    /* Map Styling */
+    #map {
+        margin: 20px auto;
+        height: 400px;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+    }
+
+    /* Animations */
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .btn {
+            font-size: 0.9em;
+            padding: 8px 12px;
+        }
+
+        #map {
+            height: 300px;
+        }
+    }
+</style>
+<body>
+    <header>
+        <h1>Live AQI Alert Dashboard</h1>
+    </header>
+    <div class="container">
+        <div class="controls">
+            <button id="refreshButton" class="btn">Refresh Alerts</button>
+            <button id="locateButton" class="btn">Locate Me</button>
+            <button id="resetMapButton" class="btn">Reset Map</button>
+        </div>
+        <div id="alertBox" class="alert">Fetching live AQI data...</div>
+        <div id="map"></div>
+    </div>
+
+    <script>
+        // Initialize Map
+        const map = L.map('map').setView([50, 50], 5); // Default coordinates for the API
+
+        // Custom Map Marker
+        const customIcon = L.icon({
+            iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34]
+        });
+
+        // Add Tile Layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // AQI Data Fetch Function
+        async function fetchAQIData() {
+            const alertBox = document.getElementById('alertBox');
+            try {
+                // Fetch AQI Data from OpenWeatherMap API
+                const apiKey = 'YOUR_API_KEY'; // Replace with your API key
+                const lat = 50; // Latitude
+                const lon = 50; // Longitude
+                const response = await fetch(http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=${apiKey});
+                const data = await response.json();
+
+                // Extract AQI from forecast (e.g., first forecast entry)
+                const aqi = data.list[0].main.aqi;
+
+                // Clear existing markers
+                map.eachLayer((layer) => {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
+
+                // Add Marker with AQI
+                const marker = L.marker([lat, lon], { icon: customIcon }).addTo(map);
+                marker.bindPopup(Forecast AQI: ${aqi}).openPopup();
+
+                // Update Alert Box and Background Color
+                if (aqi === 1) {
+                    alertBox.textContent = "AQI Level: Good 🌟";
+                    alertBox.style.backgroundColor = "#4caf50";
+                } else if (aqi === 2) {
+                    alertBox.textContent = "AQI Level: Fair ⚠";
+                    alertBox.style.backgroundColor = "#ffc107";
+                } else if (aqi === 3) {
+                    alertBox.textContent = "AQI Level: Moderate ⚠";
+                    alertBox.style.backgroundColor = "#ff9800";
+                } else if (aqi === 4) {
+                    alertBox.textContent = "AQI Level: Poor ❌";
+                    alertBox.style.backgroundColor = "#f44336";
+                } else if (aqi === 5) {
+                    alertBox.textContent = "AQI Level: Hazardous 🚨";
+                    alertBox.style.backgroundColor = "#b71c1c";
+                }
+            } catch (error) {
+                console.error("Failed to fetch AQI data:", error);
+                alertBox.textContent = "Error fetching AQI data. Please try again later.";
+                alertBox.style.backgroundColor = "#b71c1c";
+            }
+        }
+
+        // Center Map on User's Location
+        function locateMe() {
+            map.locate({ setView: true, maxZoom: 16 });
+            map.on('locationfound', (e) => {
+                L.marker(e.latlng, { icon: customIcon })
+                    .addTo(map)
+                    .bindPopup("You are here!")
+                    .openPopup();
+            });
+            map.on('locationerror', () => {
+                alert("Unable to access your location.");
+            });
+        }
+
+        // Reset Map View
+        function resetMap() {
+            map.setView([50, 50], 5); // Reset to default coordinates
+        }
+
+        // Add Event Listeners
+        document.getElementById('refreshButton').addEventListener('click', fetchAQIData);
+        document.getElementById('locateButton').addEventListener('click', locateMe);
+        document.getElementById('resetMapButton').addEventListener('click', resetMap);
+
+        // Fetch AQI Data Initially
+        fetchAQIData();
+    </script>
+</body>
+</html>

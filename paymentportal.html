@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Payment Gateway</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1c92d2, #f2fcfe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    /* Payment Container */
+    .payment-container {
+      width: 90%;
+      max-width: 500px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #00796b;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid #ddd;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    input:focus {
+      border-color: #00796b;
+      box-shadow: 0 0 10px rgba(0, 121, 107, 0.3);
+      outline: none;
+    }
+
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2em;
+      background: linear-gradient(45deg, #56ab2f, #a8e063);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .otp-section {
+      display: none;
+      margin-top: 15px;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Captcha & OTP Styling */
+    .captcha-box {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .captcha-box input {
+      width: 60%;
+    }
+
+    .captcha-image {
+      width: 30%;
+      height: 40px;
+      background: #ddd;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-container">
+    <h1>Secure Payment Gateway</h1>
+    <form id="paymentForm">
+      <!-- User Details -->
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="text" id="upi" placeholder="UPI Number" required>
+      <input type="text" id="debitCard" placeholder="Debit Card Number" maxlength="16" required>
+      <input type="number" id="amount" placeholder="Enter Amount (USD)" required>
+
+      <!-- Captcha Section -->
+      <div class="captcha-box">
+        <div class="captcha-image" id="captcha">5G8X1</div>
+        <input type="text" id="captchaInput" placeholder="Enter Captcha" required>
+      </div>
+
+      <!-- OTP Section -->
+      <div class="otp-section" id="otpSection">
+        <input type="text" id="otp" placeholder="Enter OTP" maxlength="6">
+        <button type="button" id="verifyOtp">Verify OTP</button>
+      </div>
+
+      <!-- Pay Button -->
+      <button type="button" id="payButton">Pay Now</button>
+    </form>
+    <div class="footer">Powered by SmartVann | © 2024</div>
+  </div>
+
+  <script>
+    // Captcha Generation and Validation
+    const captcha = document.getElementById('captcha');
+    const captchaInput = document.getElementById('captchaInput');
+    const payButton = document.getElementById('payButton');
+    const otpSection = document.getElementById('otpSection');
+    const otpInput = document.getElementById('otp');
+    const verifyOtpButton = document.getElementById('verifyOtp');
+
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let captchaText = '';
+      for (let i = 0; i < 5; i++) {
+        captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      captcha.textContent = captchaText;
+    }
+
+    generateCaptcha();
+
+    payButton.addEventListener('click', () => {
+      if (captchaInput.value !== captcha.textContent) {
+        alert('Invalid Captcha! Please try again.');
+        generateCaptcha();
+        captchaInput.value = '';
+      } else {
+        alert('Captcha Verified! Proceeding to OTP Verification...');
+        otpSection.style.display = 'block';
+        payButton.disabled = true;
+      }
+    });
+
+    verifyOtpButton.addEventListener('click', () => {
+      if (otpInput.value === '123456') {
+        alert('Payment Successful! Thank you for your donation.');
+        location.reload();
+      } else {
+        alert('Invalid OTP! Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

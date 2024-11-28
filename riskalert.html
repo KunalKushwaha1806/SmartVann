@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Alerts - AQI Monitoring</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #f1f8e9, #c8e6c9);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .key-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .key-feature {
+            flex: 1 1 calc(30% - 20px);
+            margin: 10px;
+            padding: 20px;
+            background: #f1f8e9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            width: 90%;
+            height: 400px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+
+        .highlight {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        🚨 Risk Alerts - Protecting Lives with AQI Monitoring 🚨
+    </header>
+
+    <div class="container">
+        <!-- 3D Visualization Section Removed -->
+
+        <div class="section">
+            <h2>Key Features</h2>
+            <div class="key-features">
+                <div class="key-feature">
+                    <h3>Automatic Alerts</h3>
+                    <p>Sends real-time alerts to individuals in high-risk areas based on <span class="highlight">AQI</span> levels and population density.</p>
+                </div>
+                <div class="key-feature">
+                    <h3>Calculates Risk Zones</h3>
+                    <p>Identifies high-risk areas using advanced data analytics and <span class="highlight">geo-spatial monitoring</span>.</p>
+                </div>
+                <div class="key-feature">
+                    <h3>Precautionary Guides</h3>
+                    <p>Provides personalized safety precautions to reduce health risks in polluted environments.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>AQI Data Visualization</h2>
+            <canvas id="aqiChart"></canvas>
+        </div>
+
+        <div class="section">
+            <h2>How It Works</h2>
+            <p>
+                Our advanced system collects data from reliable sources like government AQI monitors and satellites. 
+                Risk zones are calculated based on <span class="highlight">real-time AQI</span> levels and population density. Alerts are sent to registered users to notify them of dangerous conditions.
+            </p>
+            <p>
+                <a href="#" style="color: #2e7d32; font-weight: bold;">Learn More</a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 SmartVann. Dedicated to your safety and well-being.
+    </footer>
+
+    <script>
+        // AQI Chart Visualization
+        const ctx = document.getElementById('aqiChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['City A', 'City B', 'City C', 'City D', 'City E'],
+                datasets: [{
+                    label: 'AQI Levels',
+                    data: [150, 200, 170, 300, 120],
+                    backgroundColor: [
+                        '#ff5722',
+                        '#d32f2f',
+                        '#fbc02d',
+                        '#4caf50',
+                        '#2196f3'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

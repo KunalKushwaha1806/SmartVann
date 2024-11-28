@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Submission | SmartVann</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f3e7e9, #e3eeff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Container */
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      width: 90%;
+      max-width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      color: #4caf50;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .submit-another {
+      background: linear-gradient(45deg, #4caf50, #81c784);
+    }
+
+    .back-home {
+      background: linear-gradient(45deg, #2196f3, #64b5f6);
+    }
+
+    /* 3D Animation */
+    .thank-you {
+      position: relative;
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #4caf50;
+      animation: rotateIn 1.5s ease-in-out;
+    }
+
+    @keyframes rotateIn {
+      from {
+        opacity: 0;
+        transform: rotateX(-90deg);
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(0deg);
+      }
+    }
+
+    .sparkles {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 80%);
+      animation: sparkle 2s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        transform: scale(0.8) translate(-50%, -50%);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.2) translate(-50%, -50%);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="thank-you">
+      Thank You! 
+      <div class="sparkles"></div>
+    </div>
+    <p>Your feedback has been successfully submitted. We appreciate your time and effort in helping us improve.</p>
+    <div class="button-container">
+      <a href="createacc5.html"><button class="submit-another" onclick="submitAnother()">Submit Another</button></a>
+      <a href="create accc2.html"><button class="back-home" onclick="goHome()">Go to Homepage</button></a>
+    </div>
+  </div>
+
+  <script>
+    // Redirects for buttons
+    function submitAnother() {
+      window.location.href = '/feedback'; // Replace with your feedback form page URL
+    }
+
+    function goHome() {
+      window.location.href = '/'; // Replace with your homepage URL
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartVann Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js"></script>
+</head>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #00a86b, #00c853);
+    color: white;
+    line-height: 1.6;
+}
+
+.report-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+/* Header Section */
+.report-header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #00c853, #00796b);
+    border-radius: 15px;
+    color: white;
+}
+
+.report-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Filter Section */
+.filter-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+label {
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #00a86b;
+    border-radius: 5px;
+    outline: none;
+    margin-right: 10px;
+}
+
+.fetch-data-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #00c853, #00796b);
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.fetch-data-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Data Section */
+.data-section {
+    margin: 20px 0;
+}
+
+.data-display {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.info-box {
+    padding: 20px;
+    background: #f4f4f4;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h3 {
+    margin-bottom: 10px;
+    color: #00a86b;
+}
+
+.data-chart {
+    max-width: 100%;
+    margin: 20px auto;
+}
+</style>
+<body>
+    <div class="report-container">
+        <header class="report-header">
+            <h1>SmartVann Global Report</h1>
+            <p>Explore AQI and Population Density Data by Country</p>
+        </header>
+
+        <section class="filter-section">
+            <label for="country-selector">Choose a Country:</label>
+            <select id="country-selector">
+                <option value="" disabled selected>Select a Country</option>
+                <option value="USA">United States</option>
+                <option value="India">India</option>
+                <option value="China">China</option>
+                <option value="Australia">Australia</option>
+                <option value="Germany">Germany</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Canada">Canada</option>
+            </select>
+            <button id="fetch-data-btn" class="fetch-data-btn">Fetch Data</button>
+        </section>
+
+        <section class="data-section">
+            <h2 id="country-title">Country Report</h2>
+            <div class="data-display">
+                <div class="info-box">
+                    <h3>Air Quality Index (AQI)</h3>
+                    <p id="aqi-value">-</p>
+                </div>
+                <div class="info-box">
+                    <h3>Population Density</h3>
+                    <p id="population-density">-</p>
+                </div>
+            </div>
+            <canvas id="data-chart" class="data-chart"></canvas>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 SmartVann. All Rights Reserved.</p>
+    </footer>
+    <script>
+        // Mock Data for AQI and Population Density
+const data = {
+    USA: { aqi: 42, populationDensity: 36 },
+    India: { aqi: 134, populationDensity: 464 },
+    China: { aqi: 85, populationDensity: 153 },
+    Australia: { aqi: 23, populationDensity: 3 },
+    Germany: { aqi: 44, populationDensity: 233 },
+    Brazil: { aqi: 38, populationDensity: 25 },
+    Canada: { aqi: 18, populationDensity: 4 },
+};
+
+// Event Listener for Fetching Data
+document.getElementById('fetch-data-btn').addEventListener('click', () => {
+    const country = document.getElementById('country-selector').value;
+
+    if (country && data[country]) {
+        // Update the Data Section
+        document.getElementById('country-title').textContent = Report for ${country};
+        document.getElementById('aqi-value').textContent = data[country].aqi;
+        document.getElementById('population-density').textContent = ${data[country].populationDensity} people/km²;
+
+        // Update the Chart
+        updateChart(country, data[country]);
+    } else {
+        alert('Please select a valid country!');
+    }
+});
+
+// Initialize Chart.js
+const ctx = document.getElementById('data-chart').getContext('2d');
+const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['AQI', 'Population Density'],
+        datasets: [{
+            label: 'Environmental Data',
+            data: [0, 0],
+            backgroundColor: ['#00a86b', '#00796b'],
+            borderRadius: 5,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+        },
+    }
+});
+
+// Update Chart Function
+function updateChart(country, stats) {
+    chart.data.datasets[0].data = [stats.aqi, stats.populationDensity];
+    chart.update();
+}
+    </script>
+</body>
+</html>

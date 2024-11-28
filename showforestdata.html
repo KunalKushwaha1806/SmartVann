@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartVann Reports</title>
+    
+    <script src="script.js" defer></script>
+</head>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #43cea2, #185a9d);
+    color: white;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Container */
+.report-page-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #00796b, #28a745);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1rem;
+}
+
+/* Reports Section */
+.reports-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Report Card */
+.report-card {
+    perspective: 1000px;
+    width: 200px;
+    height: 330px;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform 0.8s;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-front {
+    transform: rotateY(0);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #28a745, #00796b);
+    color: white;
+}
+
+.report-card:hover .card-front {
+    transform: rotateY(-180deg);
+}
+
+.report-card:hover .card-back {
+    transform: rotateY(0);
+}
+
+/* Highlights List */
+.card-back ul {
+    text-align: left;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.card-back ul li {
+    margin: 5px 0;
+}
+
+/* Read More Button */
+.read-more-btn {
+    background: linear-gradient(135deg, #185a9d, #43cea2);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.read-more-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+</style>
+<body>
+    <div class="report-page-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>SmartVann-Global Forest Insights</h1>
+            <p>"Global Forest Insights" refers to knowledge, understanding, or analysis related to forests across the world. It might encompass topics such as deforestation, reforestation, biodiversity, forest conservation, the role of forests in climate change, and their impact on ecosystems and human societies globally.</p>
+        </header>
+
+        <!-- Reports Section -->
+        <section class="reports-section">
+            <!-- Article 1 -->
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Ecological Dynamics</h2>
+                    <p>The natural processes, species diversity, and ecosystems within forests that maintain environmental balance and support life.
+
+                    </p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li> Sustain biodiversity, regulate climate, and provide essential ecosystem services like oxygen production and carbon storage.</li>
+                    </ul>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Human Interactions</h2>
+                    <p>The ways humans utilize, depend on, and impact forests through activities like agriculture, logging, conservation, and cultural practices.
+
+                    </p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li>Human activities both exploit forests for resources and contribute to their conservation through sustainable practices.</li>
+                    </ul>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Threats And Challenges</h2>
+                    <p>The pressures forests face, including deforestation, biodiversity loss, climate change impacts, and invasive species.
+
+                    </p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li>Deforestation, climate change, and habitat destruction threaten forest ecosystems and their inhabitants.</li>
+                    </ul>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Innovation And Solutions</h2>
+                    <p>Modern tools, technologies, and sustainable strategies aimed at conserving and restoring forests globally.
+
+                    </p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li>Technologies like satellite monitoring and sustainable practices like agroforestry aid in forest conservation.</li>
+                    </ul>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+            <div class="report-card">
+                <div class="card-front">
+                    <h2>Regional And Global Perspective</h2>
+                    <p>The study of forests based on their unique characteristics and roles across different regions, from tropical to boreal zones, and their collective global importance.
+
+                    </p>
+                </div>
+                <div class="card-back">
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li>Forests, from tropical to boreal, vary in characteristics but collectively influence global biodiversity and climate.</li>
+                    </ul>
+                    <button class="read-more-btn">Read More</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Scroll Reveal Animation for Cards
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.report-card');
+    const options = {
+        root: null,
+        threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, options);
+
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+});
+    </script>
+</body>
+</html>

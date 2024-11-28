@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Population Density Analysis</title>
+    <!-- Include Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background: linear-gradient(120deg, #1e3c72, #2a5298); /* Live background gradient */
+            overflow: hidden;
+        }
+
+        #container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            text-align: center;
+            top: 20%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #f0f, 0 0 30px #f0f;
+            }
+            to {
+                text-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
+            }
+        }
+
+        button {
+            background: #1e90ff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            background: #00bfff;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Background -->
+    <div id="container"></div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h1>Population Density Analysis</h1>
+        <p>
+            Explore population density insights with an innovative approach. Click the button below to open the analysis.
+        </p>
+        <button onclick="openColab()">Run Population Density Analysis</button>
+    </div>
+
+    <script>
+        // Open the Colab link
+        function openColab() {
+            window.open(
+                "https://colab.research.google.com/drive/1UtdRqeL7RrUBFXcaFP2PLC3dY9nkwDF9?usp=sharing",
+                "_blank"
+            );
+        }
+
+        // Three.js Animated Background
+        let scene, camera, renderer, stars;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById("container").appendChild(renderer.domElement);
+
+            // Add stars
+            const starGeometry = new THREE.BufferGeometry();
+            const starMaterial = new THREE.PointsMaterial({ color: 0xffffff });
+
+            const starVertices = [];
+            for (let i = 0; i < 10000; i++) {
+                const x = (Math.random() - 0.5) * 2000;
+                const y = (Math.random() - 0.5) * 2000;
+                const z = (Math.random() - 0.5) * 2000;
+                starVertices.push(x, y, z);
+            }
+
+            starGeometry.setAttribute(
+                "position",
+                new THREE.Float32BufferAttribute(starVertices, 3)
+            );
+
+            stars = new THREE.Points(starGeometry, starMaterial);
+            scene.add(stars);
+
+            camera.position.z = 1;
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate the star field
+            stars.rotation.x += 0.0005;
+            stars.rotation.y += 0.0005;
+
+            renderer.render(scene, camera);
+        }
+
+        // Adjust scene on window resize
+        window.addEventListener("resize", () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+
+        // Initialize the scene
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live AQI Chatbot</title>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    /* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #48d75b, #503abc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+#chatbot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+#chatbot {
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-in-out;
+}
+
+#chat-header {
+    background-color: #4caf50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#chatbox {
+    padding: 20px;
+    height: calc(100% - 70px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#chatbox-messages {
+    margin-bottom: 10px;
+    flex-grow: 1;
+}
+
+.message {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: #e1f5fe;
+    align-self: flex-start;
+    animation: fadeInLeft 0.5s;
+}
+
+.chatbot-message {
+    background-color: #c8e6c9;
+    align-self: flex-end;
+    animation: fadeInRight 0.5s;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Animation */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+</style>
+<body>
+    <div id="chatbot-container">
+        <div id="chatbot">
+            <div id="chat-header">
+                <h2>Nanoray</h2>
+            </div>
+            <div id="chatbox">
+                <div id="chatbox-messages"></div>
+                <div class="input-container">
+                    <input type="text" id="user-input" placeholder="Ask me anything...">
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            
+            const rules = {
+                "hello": "Hi there! How can I assist you today?",
+                "hi": "Hello! What can I do for you?",
+                "how are you": "I'm just a bot, but I'm here to help!",
+                "help": "Sure, I can help! Please tell me more.",
+                "bye": "Goodbye! Have a great day!",
+                "team details": "Our team has 5 members: Aditya Singh (GIS, API, and frontend), Nancy Kumari (backend), Vaishali (backend), Harshit Singh (frontend), Amit Bhardwaj (chatbot).",
+                "our objective": "The project aims to leverage live satellite data and population density datasets to provide actionable environmental insights and promote sustainability.",
+                "air quality index": "By analyzing real-time satellite data on forest conditions, we deliver accurate AQI alerts, helping individuals and organizations make informed health decisions.",
+                "how to check aqi": "Click on this link to check AQI: [Add Link Here]",
+                "how to get the population density": "Click on this link to get population density: [Add Link Here]",
+                "what are blogs": "Blogs are online articles or write-ups where ideas, insights, and experiences are shared."
+            };
+        
+            
+            function getResponse(userInput) {
+                userInput = userInput.toLowerCase().trim();
+                if (rules[userInput]) {
+                    return rules[userInput];
+                } else {
+                    return "Sorry, I didn't get that. Can you please rephrase?";
+                }
+            }
+        
+            // Function to display messages in the chatbox
+            function displayMessage(message, isUser) {
+                const messageElement = $('<div></div>').addClass('message');
+                if (isUser) {
+                    messageElement.addClass('user-message').text(message);
+                } else {
+                    messageElement.addClass('chatbot-message').text(message);
+                }
+                $('#chatbox-messages').append(messageElement);
+                $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight); // Scroll to bottom
+            }
+        
+            // Send button click event
+            $('#send-btn').click(function() {
+                const userInput = $('#user-input').val();
+                if (userInput) {
+                    displayMessage(userInput, true); // Display user's message
+                    const response = getResponse(userInput); // Get chatbot's response
+                    setTimeout(function() {
+                        displayMessage(response, false); // Display chatbot's message
+                    }, 1000);
+                    $('#user-input').val(''); // Clear input field
+                }
+            });
+        
+            // Enter key event to send message
+            $('#user-input').keypress(function(event) {
+                if (event.which === 13) {
+                    $('#send-btn').click();
+                } 
+            });
+        });
+    </script>
+</body>
+</html>

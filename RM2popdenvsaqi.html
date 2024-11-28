@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQI and Population Density Comparison</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e0f7fa, #80deea);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #00695c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            position: sticky;
+            top: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .intro-section, .data-section {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100%;
+            height: 400px;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #00796b;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            text-align: left;
+            margin: 20px auto;
+        }
+
+        .features li {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        footer {
+            background-color: #004d40;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            position: sticky;
+            bottom: 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-container {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .chart-wrapper {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        SmartVann🌍 AQI and Population Density Comparison
+    </header>
+
+    <div class="container">
+        <!-- Introduction Section -->
+        <div class="intro-section">
+            <h2>Understanding AQI and Population Density</h2>
+            <p>
+                The Air Quality Index (AQI) measures the pollution levels in cities, while population density indicates how crowded an area is. By comparing these two factors, we can identify regions where pollution poses the highest health risks due to population concentration.
+            </p>
+        </div>
+
+        <!-- AQI and Population Density Comparison Section -->
+        <div class="data-section">
+            <h2> AQI and Population Density Data Visualization</h2>
+            <div class="chart-wrapper">
+                <!-- AQI Chart -->
+                <div class="chart-container">
+                    <h3>AQI Levels for Indian Cities</h3>
+                    <canvas id="aqiChart"></canvas>
+                </div>
+
+                <!-- Population Density Chart -->
+                <div class="chart-container">
+                    <h3>Population Density for Indian Cities</h3>
+                    <canvas id="popDensityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 SmartVann. All Rights Reserved.
+    </footer>
+
+    <script>
+        // AQI Chart Visualization
+        const aqiCtx = document.getElementById('aqiChart').getContext('2d');
+        const aqiChart = new Chart(aqiCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Chennai'], // Replace with actual city names
+                datasets: [{
+                    label: 'AQI Levels',
+                    data: [350, 180, 85, 250, 120], // Replace with actual AQI data for those cities
+                    backgroundColor: [
+                        '#ff5722', // color for Delhi
+                        '#d32f2f', // color for Mumbai
+                        '#fbc02d', // color for Bangalore
+                        '#4caf50', // color for Kolkata
+                        '#2196f3'  // color for Chennai
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'AQI Level'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Population Density Chart Visualization
+        const popDensityCtx = document.getElementById('popDensityChart').getContext('2d');
+        const popDensityChart = new Chart(popDensityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Chennai'], // Replace with actual city names
+                datasets: [{
+                    label: 'Population Density (per km²)',
+                    data: [11320, 20410, 4900, 2400, 2600], // Replace with actual population density data (in persons per km²)
+                    backgroundColor: [
+                        '#ff9800', // color for Delhi
+                        '#f57c00', // color for Mumbai
+                        '#ffeb3b', // color for Bangalore
+                        '#00bcd4', // color for Kolkata
+                        '#009688'  // color for Chennai
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Population Density (per km²)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
